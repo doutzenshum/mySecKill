@@ -51,12 +51,13 @@
         <!--注入SqlSessionFactory-->
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
         <!-- 给出需要扫描的Dao接口-->
-        <property name="basePackage" value="top.doutzen.dao"/>
+        <property name="basePackage" value="top.doutzen.dao" />
+
     </bean>
 
     <!--redisDao-->
-    <!--<bean id="redisDao" class="top.doutzen.dao.cache.RedisDao">
+    <bean id="redisDao" class="top.doutzen.dao.cache.RedisDao">
         <constructor-arg index="0" value="localhost"/>
         <constructor-arg index="1" value="6379"/>
-    </bean>-->
+    </bean>
 </beans>
