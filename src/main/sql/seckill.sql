@@ -10,17 +10,17 @@ CREATE  PROCEDURE  `seckill`.`execute_seckill`
 
 BEGIN
 
-  DECLARE insert_count int DEFAULT 0;
+  DECLARE insert_count int DEFAULT 0;--声明insert_count参数，默认是0（表示秒杀结束）
     START TRANSACTION ;
     INSERT ignore INTO success_killed(seckill_id,user_phone,create_time,state)VALUES(v_seckill_id,v_phone,v_kill_time,1);
 
-    SELECT ROW_COUNT() INTO insert_count;
+    SELECT ROW_COUNT() INTO insert_count;--ROW_COUNT()是一个函数，将其赋值到insert_count中
     IF(insert_count = 0)THEN
      ROLLBACK ;
-     SET r_result=-1;
+     SET r_result=-1;--insert_count为0，即影响的行数为0时表示重复秒杀
     ELSEIF(insert_count<0)THEN
      ROLLBACK ;
-     SET r_result=-2;
+     SET r_result=-2;--insert_count小于0，即sql错误/未执行修改的sql时，表示-2系统异常
 
     ELSE
      UPDATE seckill set number = number-1 WHERE seckill_id = v_seckill_id and end_time > v_kill_time and start_time <v_kill_time
@@ -28,10 +28,10 @@ BEGIN
     SELECT ROW_COUNT() INTO insert_count;
      IF(insert_count<=0)THEN
       ROLLBACK ;
-      SET r_result = -2;
+      SET r_result = -2;--系统异常
      ELSE
       COMMIT ;
-      SET r_result = 1;
+      SET r_result = 1;--秒杀成功
      END IF;
   END IF;
 END ;
