@@ -5,6 +5,7 @@ import top.doutzen.entity.Seckill;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by DoutzenShum on 2017/7/30.
@@ -35,4 +36,11 @@ public interface SeckillDao {
      */
     List<Seckill> queryAll(@Param("offset") int offset, @Param("limit") int limit);
 
+    /**使用存储过程
+     *@Author DoutzenShum
+     *@Date 2017/8/16 10:04
+     *@Param
+     *@Return
+     */
+    void killByProcedure(Map<String, Object> map);
 }
