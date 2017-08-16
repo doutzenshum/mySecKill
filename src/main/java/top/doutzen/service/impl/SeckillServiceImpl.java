@@ -145,7 +145,7 @@ public class SeckillServiceImpl implements SeckillService {
 
     public SeckillExecution executeSeckillProcedure(long seckillId, long userPhone, String md5) {
         if (md5 == null || !md5.equals(getMD5(seckillId))) {
-            return new SeckillExecution(seckillId, SeckillStatEnum.DATE_REWRITE);
+            return new SeckillExecution(seckillId, SeckillStatEnum.DATA_REWRITE);
         }
         Date killTime = new Date();
         Map<String, Object> map = new HashMap<String, Object>();
